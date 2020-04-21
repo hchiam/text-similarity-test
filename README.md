@@ -9,3 +9,7 @@ This tool could possibly be used to check whether a free-form answer closely mat
 ## Try it from your own computer
 
 `open index.html` or `yarn start` or `npm start`
+
+## Related repo
+
+<https://github.com/hchiam/learning-tensorflow>
