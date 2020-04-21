@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TensorFlow.js Text Similarity Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+    <script src="tfjs-stuff.js"></script>
+    <script src="index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/hchiam/css-boilerplate@3.0.0/style.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <h2>Sentence 1:</h2>
+    <input
+      id="sentence1"
+      type="text"
+      value="How are you?"
+      class="disabled"
+      disabled
+    />
+    <h2>Sentence 2:</h2>
+    <input
+      id="input"
+      type="text"
+      placeholder="Enter a sentence here."
+      value="Hi, how are you?"
+    />
+    <p>
+      <button id="get-similarity" onclick="getSimilarityOfInput()">
+        Calculate similarity
+      </button>
+      <i
+        id="spinner"
+        class="fa fa-spinner fa-spin"
+        style="visibility: hidden;"
+      ></i>
+    </p>
+    <div id="output" style="visibility: hidden;">
+      <h2>Similarity:</h2>
+      <p id="similarity"></p>
+    </div>
+  </body>
+</html>

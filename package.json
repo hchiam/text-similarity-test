@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@tensorflow-models/universal-sentence-encoder": "^1.2.2",
+    "@tensorflow/tfjs": "^1.7.2",
+    "@tensorflow/tfjs-node": "^1.7.2"
+  },
+  "name": "tfjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "open index.html"
+  },
+  "author": "hchiam",
+  "license": "MIT",
+  "description": ""
+}

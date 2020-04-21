@@ -1,0 +1,9 @@
+.disabled:hover {
+  background: rgb(32, 32, 32);
+  color: whitesmoke;
+  cursor: not-allowed;
+}
+
+#spinner {
+  cursor: wait;
+}
