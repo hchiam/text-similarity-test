@@ -14,7 +14,7 @@ function showOutput(similarity) {
   document.getElementById("output").style.visibility = "visible";
   document.getElementById("get-similarity").style.display = "block";
   document.getElementById("spinner").style.visibility = "hidden";
-  document.getElementById("input").setAttribute("disabled", false);
+  document.getElementById("input").removeAttribute("disabled");
   document.getElementById("input").classList.remove("disabled");
 }
 
