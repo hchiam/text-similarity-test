@@ -12,6 +12,14 @@ This tool could possibly be used to check whether a free-form answer closely mat
 
 `open index.html` or [`yarn start`](https://github.com/hchiam/learning-yarn) or `npm start`
 
+## Useful references used
+
+ * https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder
+ * https://towardsdatascience.com/how-to-build-a-textual-similarity-analysis-web-app-aa3139d4fb71
+ * https://github.com/jinglescode/demos/tree/master/src/app/components/nlp-sentence-encoder
+ * https://towardsdatascience.com/how-to-measure-distances-in-machine-learning-13a396aa34ce
+ * https://en.wikipedia.org/wiki/Cosine_similarity
+
 ## Related repo
 
 <https://github.com/hchiam/learning-tensorflow>
