@@ -20,6 +20,15 @@ This tool could possibly be used to check whether a free-form answer closely mat
 <script src="https://cdn.jsdelivr.net/gh/hchiam/text-similarity-test@1.0.0/tfjs-stuff.js"></script>
 ```
 
+```js
+var sentence1 = 'Hello there!';
+var sentence2 = 'Hi, nice to see you!';
+function callback(similarityScore) {
+  alert(Math.round(similarityScore * 100 * 100) / 100 + '%');
+}
+useModel(sentence1, sentence2, callback); // useModel comes from tfjs-stuff.js
+```
+
 ## Useful references used
 
  * https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder
