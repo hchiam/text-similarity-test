@@ -1,6 +1,7 @@
 node_modules
 .DS_Store
 
+embeddings.txt
+
 # in top level only:
 /words.txt
-/embeddings.txt
