@@ -1,5 +1,7 @@
 # Text Similarity Test (using [TensorFlow.js](https://github.com/hchiam/learning-tensorflow))
 
+![version](https://img.shields.io/github/release/hchiam/text-similarity-test)
+
 It outputs a percent similarity between two sentences.
 
 This tool could possibly be used to check whether a free-form answer closely matches the expected answer in meaning. For best results, you probably should constrain responses to short sentences (i.e. short answer questions only).
@@ -15,7 +17,7 @@ This tool could possibly be used to check whether a free-form answer closely mat
 ## Import it into your own project
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/hchiam/text-similarity-test@master/tfjs-stuff.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hchiam/text-similarity-test@1.0.0/tfjs-stuff.js"></script>
 ```
 
 ## Useful references used
