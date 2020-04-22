@@ -12,6 +12,12 @@ This tool could possibly be used to check whether a free-form answer closely mat
 
 `open index.html` or [`yarn start`](https://github.com/hchiam/learning-yarn) or `npm start`
 
+## Import it into your own project
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/hchiam/text-similarity-test@master/tfjs-stuff.js"></script>
+```
+
 ## Useful references used
 
  * https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder
