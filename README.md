@@ -14,6 +14,8 @@ This tool could possibly be used to check whether a free-form answer closely mat
 
 `open index.html` or [`yarn start`](https://github.com/hchiam/learning-yarn) or `npm start`
 
+You can run `useModelToEmbedAllSentences` from CLI with `node tfjs-stuff.js`
+
 ## Import it into your own project
 
 ```html
@@ -21,21 +23,21 @@ This tool could possibly be used to check whether a free-form answer closely mat
 ```
 
 ```js
-var sentence1 = 'Hello there!';
-var sentence2 = 'Hi, nice to see you!';
+var sentence1 = "Hello there!";
+var sentence2 = "Hi, nice to see you!";
 function callback(similarityScore) {
-  alert(Math.round(similarityScore * 100 * 100) / 100 + '%');
+  alert(Math.round(similarityScore * 100 * 100) / 100 + "%");
 }
 useModel(sentence1, sentence2, callback); // useModel comes from tfjs-stuff.js
 ```
 
 ## Useful references used
 
- * https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder
- * https://towardsdatascience.com/how-to-build-a-textual-similarity-analysis-web-app-aa3139d4fb71
- * https://github.com/jinglescode/demos/tree/master/src/app/components/nlp-sentence-encoder
- * https://towardsdatascience.com/how-to-measure-distances-in-machine-learning-13a396aa34ce
- * https://en.wikipedia.org/wiki/Cosine_similarity
+- https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder
+- https://towardsdatascience.com/how-to-build-a-textual-similarity-analysis-web-app-aa3139d4fb71
+- https://github.com/jinglescode/demos/tree/master/src/app/components/nlp-sentence-encoder
+- https://towardsdatascience.com/how-to-measure-distances-in-machine-learning-13a396aa34ce
+- https://en.wikipedia.org/wiki/Cosine_similarity
 
 ## Related repo
 

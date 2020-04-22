@@ -61,3 +61,42 @@ function dotProduct(a, b) {
   }
   return sum;
 }
+
+// -------------------------------------------------
+
+const runFromCli = typeof require !== "undefined" && require.main === module;
+if (runFromCli) {
+  useModelToEmbedAllSentences(["cat", "dog"]);
+}
+
+function useModelToEmbedAllSentences(sentences, callback) {
+  require("@tensorflow/tfjs-node");
+  const use = require("@tensorflow-models/universal-sentence-encoder");
+  const fs = require("fs");
+  // uses Universal Sentence Encoder (U.S.E.):
+  use.load().then((model) => {
+    embedAllSentences(model, sentences, fs);
+  });
+}
+
+function embedAllSentences(model, sentences, fs) {
+  model.embed(sentences).then((embeddings) => {
+    const embeds = embeddings.arraySync();
+    if (fs) {
+      for (let i = 0; i < embeds.length; i++) {
+        const sentence = sentences[i];
+        const embed = embeds[i];
+        const addNewLine = i === 0 ? "" : "\n";
+        fs.appendFile("words.txt", addNewLine + sentence, function (err) {
+          if (err) throw err;
+          console.log(`Added word ${i}!`);
+        });
+        fs.appendFile("embeddings.txt", addNewLine + embed, function (err) {
+          if (err) throw err;
+          console.log(`Added embedding ${i}!`);
+        });
+      }
+      console.log("Done adding all words and embeddings (mapped by index).");
+    }
+  });
+}
