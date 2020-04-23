@@ -31,6 +31,10 @@ function callback(similarityScore) {
 useModel(sentence1, sentence2, callback); // useModel comes from tfjs-stuff.js
 ```
 
+## More things I'm testing
+
+(See the `coglangtext` sub-folder.)
+
 ## Useful references used
 
 - https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder
