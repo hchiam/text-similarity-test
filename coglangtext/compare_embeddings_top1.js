@@ -2,76 +2,83 @@ const fs = require("fs");
 require("@tensorflow/tfjs-node");
 const use = require("@tensorflow-models/universal-sentence-encoder");
 
-const inputWord = "canine";
-let mostSimilarWord = "";
-
-useModel(inputWord);
+(async () => {
+  const inputWord = "canine";
+  let mostSimilarWord = await useModel(inputWord);
+  console.log(`
+Corpus word possibly most similar to ${inputWord}: ${mostSimilarWord}
+`);
+})();
 
 async function useModel(inputWord) {
   // uses Universal Sentence Encoder (U.S.E.):
-  const output = await use.load().then(async (model) => {
-    const similarityFraction = await getEmbedding(model, inputWord);
-    return Math.round(similarityFraction * 100 * 100) / 100 + "%";
+  const mostSimilarWord = await use.load().then(async (model) => {
+    return await getEmbedding(model, inputWord);
   });
-  return output;
+  return mostSimilarWord;
 }
 
-async function getEmbedding(model, inputWord) {
-  return await model.embed([inputWord]).then(async (embeddings) => {
-    const embeds = await embeddings.arraySync();
-    const wordEmbedding = embeds[0];
+function getEmbedding(model, inputWord) {
+  return model
+    .embed([inputWord])
+    .then((inputEmbeddings) => {
+      const embeds = inputEmbeddings.arraySync();
+      const wordEmbedding = embeds[0];
 
-    fs.readFile("embeddings.txt", "utf8", async function (err, data) {
-      if (err) throw err;
-      const lines = data.split("\n");
-      if (lines.length === 0) return; // exit if no data
-      let maxSimilarityPercent = 0;
-      let indexOfMaxSimilarityPercent = -1;
-      for (let i = 0; i < lines.length; i++) {
-        const referenceEmbedding = lines[i].split(",").map((n) => Number(n));
-        if (referenceEmbedding.length === 0) continue; // skip empty line
-        const similarity = await getSimilarityPercent(
-          wordEmbedding,
-          referenceEmbedding
-        );
-        // maxSimilarityPercent = Math.max(similarity, maxSimilarityPercent);
-        if (similarity > maxSimilarityPercent) {
-          indexOfMaxSimilarityPercent = i;
-          maxSimilarityPercent = similarity;
-        }
-        // console.log(similarityPercent);
-      }
-      console.log("input word: " + inputWord);
-      console.log("max similarity: " + maxSimilarityPercent);
-      console.log("index: " + indexOfMaxSimilarityPercent);
-      fs.readFile("out_english.txt", "utf8", async function (err, data) {
-        if (err) throw err;
-        const lines = data.split("\n");
-        if (indexOfMaxSimilarityPercent > -1) {
-          mostSimilarWord = lines[indexOfMaxSimilarityPercent];
-          console.log("most similar word: " + mostSimilarWord);
-        } else {
-          console.log("no similar word found");
-        }
-      });
+      const embedsData = readFile("embeddings.txt");
+      const lines = embedsData.split("\n");
+      if (lines.length === 0) return []; // exit if no data
+
+      const similarities = getAllSimilarityScores(wordEmbedding, embedsData);
+      const topResult = getSimilarityScore(similarities);
+
+      const englishData = readFile("out_english.txt");
+      const mostSimilarWord = getMostSimilarWordFromFile(
+        topResult,
+        englishData
+      );
+      // console.log(mostSimilarWord);
+      return mostSimilarWord;
+    })
+    .catch((err) => {
+      console.log(err);
+      return [];
     });
-  });
 }
 
-async function getSimilarityPercent(wordEmbedding, referenceEmbedding) {
-  const similarity = await cosineSimilarity(wordEmbedding, referenceEmbedding);
+function readFile(filePath) {
+  return fs.readFileSync(filePath, "utf8");
+}
+
+function getAllSimilarityScores(wordEmbedding, data) {
+  const lines = data.split("\n");
+  if (lines.length === 0) return []; // exit if no data
+  const similarities = []; // TODO: use a max heap instead? Reference: https://github.com/hchiam/learning-google-closure-library/blob/master/goog-closure-example.js
+  for (let index = 0; index < lines.length; index++) {
+    const line = lines[index];
+    const referenceEmbedding = line.split(",").map((n) => Number(n));
+    if (referenceEmbedding.length === 0) continue; // skip empty line
+    const similarity = getSimilarityPercent(wordEmbedding, referenceEmbedding);
+    similarities.push({ similarity, index });
+  }
+  // console.log("similarities.length: " + similarities.length);
+  return similarities;
+}
+
+function getSimilarityPercent(wordEmbedding, referenceEmbedding) {
+  const similarity = cosineSimilarity(wordEmbedding, referenceEmbedding);
   // cosine similarity -> % when doing text comparison, since cannot have -ve term frequencies: https://en.wikipedia.org/wiki/Cosine_similarity
   return similarity;
 }
 
-async function cosineSimilarity(a, b) {
+function cosineSimilarity(a, b) {
   // https://towardsdatascience.com/how-to-build-a-textual-similarity-analysis-web-app-aa3139d4fb71
 
-  const magnitudeA = await Math.sqrt(dotProduct(a, a));
-  const magnitudeB = await Math.sqrt(dotProduct(b, b));
+  const magnitudeA = Math.sqrt(dotProduct(a, a));
+  const magnitudeB = Math.sqrt(dotProduct(b, b));
   if (magnitudeA && magnitudeB) {
     // https://towardsdatascience.com/how-to-measure-distances-in-machine-learning-13a396aa34ce
-    return (await dotProduct(a, b)) / (magnitudeA * magnitudeB);
+    return dotProduct(a, b) / (magnitudeA * magnitudeB);
   } else {
     return 0;
   }
@@ -83,4 +90,20 @@ function dotProduct(a, b) {
     sum += a[i] * b[i];
   }
   return sum;
+}
+
+function getSimilarityScore(similarities) {
+  return similarities.sort(function descending(a, b) {
+    return b.similarity - a.similarity;
+  })[0];
+  // console.log("top similar index: " + similarities.map((x) => x.index));
+  // console.log("top similarity: " + similarities.map((x) => x.similarity));
+}
+
+function getMostSimilarWordFromFile(topResult, data) {
+  const lines = data.split("\n");
+  const index = topResult.index;
+  const mostSimilarWord = lines[index];
+  // console.log("most similar word: " + mostSimilarWord);
+  return mostSimilarWord;
 }
