@@ -8,3 +8,7 @@ node compare_words.js
 node compare_embeddings_top1.js
 node compare_embeddings_top5.js
 ```
+
+## Related repo
+
+https://github.com/hchiam/text-similarity-test
