@@ -9,6 +9,8 @@ node compare_embeddings_top1.js
 node compare_embeddings_top5.js
 ```
 
-## Related repo
+## Related repos
 
 https://github.com/hchiam/text-similarity-test
+
+https://github.com/hchiam/cognateLanguage
