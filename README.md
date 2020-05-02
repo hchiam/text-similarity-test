@@ -43,6 +43,8 @@ useModel(sentence1, sentence2, callback); // useModel comes from tfjs-stuff.js
 - https://towardsdatascience.com/how-to-measure-distances-in-machine-learning-13a396aa34ce
 - https://en.wikipedia.org/wiki/Cosine_similarity
 
-## Related repo
+## Related repos
 
 <https://github.com/hchiam/learning-tensorflow>
+
+<https://github.com/hchiam/text-similarity-test-microservice>
