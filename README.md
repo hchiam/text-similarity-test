@@ -33,6 +33,12 @@ function callback(similarityScore) {
 useModel(sentence1, sentence2, callback); // useModel comes from tfjs-stuff.js
 ```
 
+## Another example
+
+<https://codepen.io/hchiam/pen/abJGGox>
+
+<https://github.com/hchiam/text-similarity-test/blob/master/summary-test.html>
+
 ## More things I'm testing
 
 (See the `coglangtext` sub-folder.)

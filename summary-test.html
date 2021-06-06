@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TensorFlow.js Text Similarity Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+    <script src="tfjs-stuff.js"></script>
+    <!-- <script src="index.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/hchiam/css-boilerplate@3.0.0/style.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      input {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Summarize this paragraph:</h2>
+    <p>
+      Automatic summarization is the process of shortening a set of information
+      computationally, to create a subset (a summary or abstract) that more
+      concisely represents the most important or relevant information within the
+      original content.
+    </p>
+    <p></p>
+    <h2>Example to compare with:</h2>
+    <input
+      id="sentence1"
+      type="text"
+      value="Automation summarization can be done with a computer to give you a shorter version on the information with its key points."
+      class="disabled"
+      disabled
+    />
+    <h2>Type your own summary here:</h2>
+    <input
+      id="input"
+      type="text"
+      placeholder="Enter a sentence here."
+      value=""
+    />
+    <p>
+      <button id="get-similarity" onclick="getSimilarityOfInput()">
+        Calculate similarity
+      </button>
+      <i
+        id="spinner"
+        class="fa fa-spinner fa-spin"
+        style="visibility: hidden"
+      ></i>
+    </p>
+    <div id="output" style="visibility: hidden">
+      <h2>Similarity:</h2>
+      <p id="similarity"></p>
+      <p>
+        This tool could possibly be used to check whether a free-form answer
+        closely matches the expected answer in meaning. For best results, you
+        probably should constrain responses to short sentences (i.e. short
+        answer questions only).
+      </p>
+    </div>
+    <script>
+      function getSimilarityOfInput() {
+        document.getElementById("get-similarity").style.display = "none";
+        document.getElementById("spinner").style.visibility = "visible";
+        document.getElementById("input").setAttribute("disabled", true);
+        document.getElementById("input").classList.add("disabled");
+        const sentence1 = document.getElementById("sentence1").value;
+        const sentence2 = document.getElementById("input").value;
+        useModel(sentence1, sentence2, showOutput);
+      }
+
+      function showOutput(similarity) {
+        const percent = similarity * 100;
+        document.getElementById("similarity").innerText =
+          get2Decimals(percent) + "%";
+        document.getElementById("output").style.visibility = "visible";
+        document.getElementById("get-similarity").style.display = "block";
+        document.getElementById("spinner").style.visibility = "hidden";
+        document.getElementById("input").removeAttribute("disabled");
+        document.getElementById("input").classList.remove("disabled");
+      }
+
+      function get2Decimals(number) {
+        return Math.round(number * 100) / 100;
+      }
+    </script>
+  </body>
+</html>
