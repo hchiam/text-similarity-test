@@ -6,6 +6,8 @@ It outputs a percent similarity between two sentences.
 
 This tool could possibly be used to check whether a free-form answer closely matches the expected answer in meaning. For best results, you probably should constrain responses to short sentences (i.e. short answer questions only).
 
+Powered by a [universal sentence encoder TensorFlow.js model](https://tfhub.dev/google/universal-sentence-encoder/).
+
 ## Try it in your browser
 
 <https://codepen.io/hchiam/pen/oNjzQRa>
