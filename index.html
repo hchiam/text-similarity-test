@@ -20,13 +20,7 @@
   </head>
   <body>
     <h2>Sentence 1:</h2>
-    <input
-      id="sentence1"
-      type="text"
-      value="How are you?"
-      class="disabled"
-      disabled
-    />
+    <input id="sentence1" type="text" value="How are you?" />
     <h2>Sentence 2:</h2>
     <input
       id="input"
@@ -41,17 +35,25 @@
       <i
         id="spinner"
         class="fa fa-spinner fa-spin"
-        style="visibility: hidden;"
+        style="visibility: hidden"
       ></i>
     </p>
-    <div id="output" style="visibility: hidden;">
+    <div id="output" style="visibility: hidden">
       <h2>Similarity:</h2>
       <p id="similarity"></p>
       <p>
         This tool could possibly be used to check whether a free-form answer
         closely matches the expected answer in meaning. For best results, you
         probably should constrain responses to short sentences (i.e. short
-        answer questions only).
+        answer questions only). For faster results, you might want to call
+        back-end code that runs a Python/PyTorch script that has been
+        pre-compiled to C. Reference for this demo:
+        <a
+          href="https://github.com/hchiam/text-similarity-test"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://github.com/hchiam/text-similarity-test</a
+        >
       </p>
     </div>
   </body>
