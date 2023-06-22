@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TensorFlow.js Text Similarity Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/hchiam/text-similarity-test@1.0.0/tfjs-stuff.js"></script> -->
+    <script src="../tfjs-stuff.js"></script>
+    <script src="../index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/hchiam/css-boilerplate@3.0.0/style.css"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      .similarity {
+        background: lime;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="q1">
+      <p>
+        Q1: What is red plus blue? Respond with a one-word sentence with full
+        punctuation.
+      </p>
+      <b>Your answer:</b>
+      <input class="sentence1" type="text" value="A colour." />
+      <i class="spinner fa fa-spinner fa-spin" style="visibility: hidden"></i>
+      <span class="output" style="visibility: hidden">
+        <b>Official answer:</b>
+        <input class="sentence2" type="text" value="Purple." disabled />
+        <br />
+        <span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&rarr; <b>Similarity score:</b>
+          <span class="similarity"></span>
+        </span>
+      </span>
+    </section>
+
+    <section id="q2">
+      <p>Q2: What's one plus one? Just provide the numerical value.</p>
+      <b>Your answer:</b>
+      <input class="sentence1" type="number" value="-42" />
+      <i class="spinner fa fa-spinner fa-spin" style="visibility: hidden"></i>
+      <span class="output" style="visibility: hidden">
+        <b>Official answer:</b>
+        <input class="sentence2" type="number" value="2" disabled />
+        <br />
+        <span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&rarr; <b>Similarity score:</b>
+          <span class="similarity"></span>
+        </span>
+      </span>
+    </section>
+
+    <section id="q3">
+      <p>
+        Q3: In "Avatar the Last Airbender", there are 4 elements mentioned in
+        the intro. What are they? Answer with one sentence with full
+        punctuation, and each element separated by a comma, in the order spoken
+        in the intro.
+      </p>
+      <b>Your answer:</b>
+      <textarea
+        class="sentence1"
+        type="text"
+        placeholder="Element 1, element 2, element 3, element 4."
+        style="display: block"
+      ></textarea>
+      <i class="spinner fa fa-spinner fa-spin" style="visibility: hidden"></i>
+      <span class="output" style="visibility: hidden">
+        <b>Official answer:</b>
+        <textarea
+          class="sentence2"
+          type="text"
+          placeholder="Water, earth, fire, air."
+          disabled
+          style="display: block"
+        >
+Water, earth, fire, air.</textarea
+        >
+        <br />
+        <span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&rarr; <b>Similarity score:</b>
+          <span class="similarity"></span>
+        </span>
+      </span>
+    </section>
+
+    <button
+      class="get-similarity disabled"
+      onclick="getSimilarityOfAllInputs()"
+    >
+      Check answers
+    </button>
+
+    <script>
+      const userInputs = [...document.querySelectorAll(".sentence1")];
+      userInputs.forEach((x) => {
+        x.addEventListener("change", () => {
+          if (!x.value) {
+            $(".get-similarity").classList.add("disabled");
+          } else {
+            const anyUnfilled = userInputs.filter((s) => !s.value).length;
+            if (anyUnfilled) {
+              $(".get-similarity").classList.add("disabled");
+            } else {
+              $(".get-similarity").classList.remove("disabled");
+            }
+          }
+        });
+      });
+
+      function getSimilarityOfAllInputs() {
+        const missingValue =
+          !$("#q1 .sentence1").value ||
+          !$("#q2 .sentence1").value ||
+          !$("#q3 .sentence1").value;
+        if (missingValue) return;
+
+        $(".get-similarity").classList.add("disabled");
+        $(".get-similarity").style.visibility = "hidden";
+
+        // getSimilarityOfInput($("#q1"), () => {
+        //   getSimilarityOfInput($("#q2"), () => {
+        //     getSimilarityOfInput($("#q3"));
+        //   });
+        // });
+        getSimilarityOfInput($("#q1"));
+        getSimilarityOfInput($("#q2"));
+        getSimilarityOfInput($("#q3"));
+      }
+    </script>
+  </body>
+</html>

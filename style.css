@@ -1,3 +1,4 @@
+.disabled:focus,
 .disabled:hover {
   background: rgb(32, 32, 32);
   color: whitesmoke;

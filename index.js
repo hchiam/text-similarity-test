@@ -1,25 +1,51 @@
-function getSimilarityOfInput() {
-  document.getElementById("get-similarity").style.display = "none";
-  document.getElementById("spinner").style.visibility = "visible";
-  document.getElementById("input").setAttribute("disabled", true);
-  document.getElementById("input").classList.add("disabled");
-  const sentence1 = document.getElementById("sentence1").value;
-  const sentence2 = document.getElementById("input").value;
-  useModel(sentence1, sentence2, showOutput);
+function $(selectorString, scope = document) {
+  return scope.querySelector(selectorString);
 }
 
-function showOutput(similarity) {
+function getSimilarityOfInput(scope = document, callback) {
+  if ($("#get-similarity, .get-similarity", scope)) {
+    $("#get-similarity, .get-similarity", scope).style.display = "none";
+  }
+  if ($("#spinner, .spinner", scope)) {
+    $("#spinner, .spinner", scope).style.visibility = "visible";
+  }
+  $("#input, .input", scope)?.setAttribute("disabled", true);
+  $("#input, .input", scope)?.classList.add("disabled");
+  const sentence1 = $("#sentence1, .sentence1", scope)?.value;
+  const sentence2 = $("#input, .input, .sentence2", scope)?.value;
+  if (sentence1 && sentence2) {
+    useModel(sentence1, sentence2, (similarity) => {
+      showOutput(similarity, scope);
+      if (callback) callback();
+    });
+  }
+}
+
+function showOutput(similarity, scope = document) {
   const percent = similarity * 100;
-  document.getElementById("similarity").innerText = get2Decimals(percent) + "%";
-  document.getElementById("output").style.visibility = "visible";
-  document.getElementById("get-similarity").style.display = "block";
-  document.getElementById("spinner").style.visibility = "hidden";
-  document.getElementById("input").removeAttribute("disabled");
-  document.getElementById("input").classList.remove("disabled");
+  if ($("#similarity, .similarity", scope)) {
+    $("#similarity, .similarity", scope).innerText =
+      getNDecimals(percent, 0) + "%";
+  }
+  if ($("#output, .output", scope)) {
+    $("#output, .output", scope).style.visibility = "visible";
+  }
+  if ($("#get-similarity, .get-similarity", scope)) {
+    $("#get-similarity, .get-similarity", scope).style.display = "block";
+  }
+  if ($("#spinner, .spinner", scope)) {
+    $("#spinner, .spinner", scope).style.visibility = "hidden";
+  }
+  if ($("#input, .input", scope)) {
+    $("#input, .input", scope).removeAttribute("disabled");
+  }
+  if ($("#input, .input", scope)) {
+    $("#input, .input", scope).classList.remove("disabled");
+  }
 }
 
-function get2Decimals(number) {
-  return Math.round(number * 100) / 100;
+function getNDecimals(number, n) {
+  return Math.round(number * 10 ** n) / 10 ** n;
 }
 
 // /**

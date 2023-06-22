@@ -10,7 +10,8 @@
   "devDependencies": {},
   "scripts": {
     "dev": "npm run start",
-    "start": "open index.html"
+    "start": "open index.html",
+    "quiz": "open quiz_test/index.html"
   },
   "author": "hchiam",
   "license": "MIT",
