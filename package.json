@@ -9,6 +9,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
+    "dev": "npm run start",
     "start": "open index.html"
   },
   "author": "hchiam",
