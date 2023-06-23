@@ -60,3 +60,7 @@ useModel(sentence1, sentence2, callback); // useModel comes from tfjs-stuff.js
 <https://github.com/hchiam/text-similarity-test-microservice>
 
 <https://github.com/hchiam/learning-annoy>
+
+## Future/Experimental
+
+https://github.com/hchiam/learning-gpt4all
