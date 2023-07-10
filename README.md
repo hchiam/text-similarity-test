@@ -66,3 +66,9 @@ useModel(sentence1, sentence2, callback); // useModel comes from tfjs-stuff.js
 https://github.com/hchiam/learning-gpt4all
 
 Text Sentiment Analysis Classification and Scoring (using `@tensorflow/tfjs`): https://codepen.io/hchiam/full/bGQWdmV
+
+## Other repos you might find interesting
+
+https://github.com/hchiam/learning-tfjs-umap
+
+https://github.com/hchiam/comment-analysis
