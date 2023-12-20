@@ -6,7 +6,9 @@ It outputs a percent similarity between two sentences.
 
 This tool could possibly be used to check whether a free-form answer closely matches the expected answer in meaning. For best results, you probably should constrain responses to short sentences (i.e. short answer questions only).
 
-Powered by a [universal sentence encoder TensorFlow.js model](https://tfhub.dev/google/universal-sentence-encoder/).
+Powered by a [Universal Sentence Encoder TensorFlow.js model (U.S.E.)](https://tfhub.dev/google/universal-sentence-encoder/).
+
+If you find this project interesting, you might also like this project that goes beyond just U.S.E.: https://github.com/hchiam/comment-analysis
 
 ## Try it in your browser
 
@@ -69,6 +71,6 @@ Text Sentiment Analysis Classification and Scoring (using `@tensorflow/tfjs`): h
 
 ## Other repos you might find interesting
 
-https://github.com/hchiam/learning-tfjs-umap
-
 https://github.com/hchiam/comment-analysis
+
+https://github.com/hchiam/learning-tfjs-umap
