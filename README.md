@@ -25,7 +25,7 @@ You can run `useModelToEmbedAllSentences` from CLI with `node tfjs-stuff.js`
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
-<script src="https://cdn.jsdelivr.net/gh/hchiam/text-similarity-test@1.0.0/tfjs-stuff.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hchiam/text-similarity-test@1.1.0/tfjs-stuff.js"></script>
 ```
 
 ```js
